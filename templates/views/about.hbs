@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>About Page</title>
+        <link rel="icon" href="/img/weather.png">
         <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
-        {{>header}}
-        <img src="/img/Emilio.jpg">
-        <p>The one above is {{name}}</p>
-    </body>
-    <footer>
+        <div class="main-content">
+            {{>header}}
+            <img class="portrait" src="/img/Emilio.jpg">
+            <p>The one above is {{name}}</p>
+        </div>
         {{>footer}}
-    </footer>
+    </body>
 </html>
