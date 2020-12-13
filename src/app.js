@@ -1,7 +1,8 @@
 const path = require('path')
 const express = require("express")
 const hbs = require("hbs")
-
+const geolocate = require("./utils/geolocate.js");
+const forecast = require("./utils/forecast.js")
 
 const app = express()
 
@@ -40,10 +41,37 @@ app.get('/help', (req, res) =>{
 })
 
 app.get('/weather', (req, res) =>{
+    if(!req.query.address){
+        return res.send({
+            error: "You must provide an address"
+        })
+    }
+    geolocate(req.query.address, (error,{latitude, longitude, location }) =>{
+        if(error){
+            return res.send({error});
+        }
+        forecast(latitude, longitude, (error, forcastData) => {
+            if(error){
+                return res.send({error});
+            }
+            res.send({
+                forecast: forcastData,
+                location,
+                address:req.query.address
+
+            })
+        })
+    })
+})
+app.get('/products', (req, res) =>{
+    if(!req.query.search){
+        return res.send({
+            error: "You must provide a search term "
+        })
+    }
+    console.log(req.query)
     res.send({
-        weather: 'Heavy rain',
-        forecast: 20,
-        location: [ 18.90, 59.90]
+        products: []
     })
 })
 app.get('/help/*', (req, res) =>{
