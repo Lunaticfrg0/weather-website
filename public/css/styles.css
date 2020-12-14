@@ -44,3 +44,12 @@ button{
     color: white;
     padding: 8px;
 }
+ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+.miniLogos{
+    width: 50px;
+    height: 50px;
+}
+  
